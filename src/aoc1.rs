@@ -212,9 +212,9 @@ fn to_nums(s: &str) -> Vec<u32> {
     s.split_whitespace().flat_map(|d| d.parse()).collect()
 }
 
-fn solution_two<I: IntoIterator<Item = u32>>(input: &mut I) -> u32 {
+fn solution_two(input: &[u32]) -> u32 {
     for i in input {
-        for j in (&input).into_iter() {
+        for j in input {
             if i + j == 2020 {
                 return i * j;
             }
@@ -227,9 +227,10 @@ fn solution_three(input: &[u32]) -> u32 {
     for i in input {
         for j in input {
             for k in input {
-            if i + j + k == 2020 {
-                return i * j * k;
-            }}
+                if i + j + k == 2020 {
+                    return i * j * k;
+                }
+            }
         }
     }
     0
