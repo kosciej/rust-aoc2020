@@ -7,7 +7,7 @@ static TEST_INPUT: &str = "1721
 675
 1456";
 
-static MAIN_INPUT: &str = include_str!("../data/d1.txt");
+static MAIN_INPUT: &str = include_str!("../../data/d1.txt");
 
 fn to_nums(s: &str) -> Vec<u32> {
     s.split_whitespace().flat_map(|d| d.parse()).collect()

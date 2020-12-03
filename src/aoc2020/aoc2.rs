@@ -4,7 +4,7 @@ static TEST_INPUT: &str = "1-3 a: abcde
 1-3 b: cdefg
 2-9 c: ccccccccc";
 
-static MAIN_INPUT: &str = include_str!("../data/d2.txt");
+static MAIN_INPUT: &str = include_str!("../../data/d2.txt");
 
 type Entry = (usize, usize, char, String);
 
