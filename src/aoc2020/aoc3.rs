@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 use std::ops::Mul;
 
-static TEST_INPUT: &str = "\
+static SAMPLE_INPUT: &str = "\
 ..##.......
 #...#...#..
 .#....#..#.
@@ -23,7 +23,7 @@ fn parse(input: &str) -> Vec<Vec<bool>> {
         .collect()
 }
 
-fn count_trees(input: &[Vec<bool>], (x_step, y_step): (usize, usize)) -> usize {
+fn ex1_count_trees(input: &[Vec<bool>], (x_step, y_step): (usize, usize)) -> usize {
     let mut y = 0;
     let mut x = 0;
     let mut trees = 0;
@@ -40,31 +40,30 @@ fn count_trees(input: &[Vec<bool>], (x_step, y_step): (usize, usize)) -> usize {
     trees
 }
 
-fn ex_2(input: &[Vec<bool>]) -> usize {
+fn ex2_count_slopes(input: &[Vec<bool>]) -> usize {
     let slopes = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];
     slopes
         .iter()
-        .map(|slope| count_trees(input, *slope))
+        .map(|slope| ex1_count_trees(input, *slope))
         .fold(1, Mul::mul)
 }
 
 #[test]
-fn test_sample1() {
-    println!("{:?}", parse(TEST_INPUT));
-    assert_eq!(7, count_trees(&parse(TEST_INPUT), (3, 1)));
+fn ex1_sample() {
+    assert_eq!(7, ex1_count_trees(&parse(SAMPLE_INPUT), (3, 1)));
 }
 
 #[test]
-fn test_main1() {
-    assert_eq!(284, count_trees(&parse(MAIN_INPUT), (3, 1)));
+fn ex1_main() {
+    assert_eq!(284, ex1_count_trees(&parse(MAIN_INPUT), (3, 1)));
 }
 
 #[test]
-fn test_sample2() {
-    assert_eq!(336, ex_2(&parse(TEST_INPUT)));
+fn ex2_sample() {
+    assert_eq!(336, ex2_count_slopes(&parse(SAMPLE_INPUT)));
 }
 
 #[test]
-fn test_main2() {
-    assert_eq!(3510149120, ex_2(&parse(MAIN_INPUT)));
+fn ex2_main() {
+    assert_eq!(3510149120, ex2_count_slopes(&parse(MAIN_INPUT)));
 }

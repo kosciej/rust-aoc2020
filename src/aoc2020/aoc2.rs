@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-static TEST_INPUT: &str = "1-3 a: abcde
+static SAMPLE_INPUT: &str = "1-3 a: abcde
 1-3 b: cdefg
 2-9 c: ccccccccc";
 
@@ -24,13 +24,13 @@ fn parse_line(input: &str) -> Option<Entry> {
     Some((min.parse().ok()?, max.parse().ok()?, chr, pass.to_string()))
 }
 
-fn check1(entry: &Entry) -> bool {
+fn ex1_check(entry: &Entry) -> bool {
     let (min, max, chr, pass) = entry;
     let count: usize = pass.chars().filter(|c| c == chr).count();
     count >= *min && count <= *max
 }
 
-fn check2(entry: &Entry) -> bool {
+fn ex2_check(entry: &Entry) -> bool {
     let (pos1, pos2, chr, pass) = entry;
     let count: usize = pass
         .chars()
@@ -40,32 +40,30 @@ fn check2(entry: &Entry) -> bool {
     count == 1
 }
 
-fn count_valid1(entries: Vec<Entry>) -> usize {
-    entries.iter().filter(|e| check1(e)).count()
+fn ex1_count_valid(entries: Vec<Entry>) -> usize {
+    entries.iter().filter(|e| ex1_check(e)).count()
 }
 
-fn count_valid2(entries: Vec<Entry>) -> usize {
-    entries.iter().filter(|e| check2(e)).count()
-}
-
-#[test]
-fn test_sample1() {
-    println!("{:?}", parse(TEST_INPUT));
-    assert_eq!(2, count_valid1(parse(TEST_INPUT)));
+fn ex2_count_valid(entries: Vec<Entry>) -> usize {
+    entries.iter().filter(|e| ex2_check(e)).count()
 }
 
 #[test]
-fn test_main1() {
-    assert_eq!(422, count_valid1(parse(MAIN_INPUT)));
+fn ex1_sample() {
+    assert_eq!(2, ex1_count_valid(parse(SAMPLE_INPUT)));
 }
 
 #[test]
-fn test_sample2() {
-    println!("{:?}", parse(TEST_INPUT));
-    assert_eq!(1, count_valid2(parse(TEST_INPUT)));
+fn ex1_main() {
+    assert_eq!(422, ex1_count_valid(parse(MAIN_INPUT)));
 }
 
 #[test]
-fn test_main2() {
-    assert_eq!(451, count_valid2(parse(MAIN_INPUT)));
+fn ex2_sample() {
+    assert_eq!(1, ex2_count_valid(parse(SAMPLE_INPUT)));
+}
+
+#[test]
+fn ex2_main() {
+    assert_eq!(451, ex2_count_valid(parse(MAIN_INPUT)));
 }
